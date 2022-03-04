@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+  
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+}
+h1 {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
+}
+
+.container{
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
