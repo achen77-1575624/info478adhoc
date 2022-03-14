@@ -1,6 +1,7 @@
 # load your libraries
 # read in the data set 
-library(shiny)
+library("shiny")
+library("tidyverse")
 
 # Clean your data and explore variables 
 

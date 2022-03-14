@@ -1,3 +1,6 @@
+library("tidyverse")
+library("shiny")
+
 # load your libraries
 # read in the data set 
 source("app_server.R")
@@ -107,10 +110,10 @@ page_2 <- tabPanel(
         Mexico, had more days in 2021 with poor air quality. However, this may have been due to the many
         wildfires that were consuming the southwest at the time."),
       p("The bottom map shows the distribution of total COVID deaths or %CD. Again, the southwest is
-        consistently brighter than the rest of the United States. Since COVID still makes up a small
-        (yet impactful) portion of deaths, the actual percentage differences between the southwest and
-        the rest of the United States aren't considerably large, but combined with the rest of the maps,
-        it's clear that the southwest has been most impacted.")
+        consistently brighter than the rest of the United States on total deaths. The results are much more spread out
+        when sorting by %CD, and since COVID still makes up a small (yet impactful) portion of deaths, 
+        the actual percentage differences between the southwest and the rest of the United States aren't 
+        considerably large. But combined with the rest of the maps, it's clear that the southwest has been most impacted.")
     ),
     mainPanel(
       plotOutput("plot2"),
@@ -249,8 +252,8 @@ conclusion <- tabPanel(
         impacted the most by COVID deaths. However, controlling for population size, we can see that noncore
         and other smaller counties are almost just as impacted by COVID deaths. My hypothesis is
         therefore only particially correct. Larger central metros are impacted more by COVID deaths, but
-        this difference is not large at all between the urbanicities. However, factors like unemployment
-        and healthcare facilities seem to have much more of a moderating effect on COVID death outcome in
+        this difference is not large at all between the urbanicities. However, factors like unemployment rate, air
+        quality, and healthcare facilities seem to have much more of a moderating effect on COVID death outcome in
         large central metros, not noncore counties."),
       p("Judging by how noncore counties have just as many healthcare facilities as large central metro counties,
         it's also inconclusive to say that this is a decisive factor for the rates of death from COVID in noncore
@@ -281,7 +284,7 @@ conclusion <- tabPanel(
       p("As the pandemic continues on, data visualizations like these offer insights on specific
         populations that are at risk for negative outcomes. In this case, those who are unemployed and
         have less healthcare access are at higher risk of death from COVID especially if they live in
-        larger central metros."),
+        larger central metros with poor air quality."),
       column(12, uiOutput("con_img")) %>%
         tagAppendAttributes(class = 'intro_img'),
     )

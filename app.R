@@ -1,6 +1,7 @@
 # load your libraries
 library("shiny")
 library("shinyWidgets")
+library("rsconnect")
 
 # read in your files (make sure to double check path)
 source("app_ui.R")

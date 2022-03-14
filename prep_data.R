@@ -6,7 +6,6 @@ require(data.table)
 library(scales)
 library(maps)
 library(mapproj)
-library(patchwork)
 library(ggpmisc)
 
 # https://data.cdc.gov/NCHS/Provisional-COVID-19-Death-Counts-in-the-United-St/kn79-hsxy
@@ -18,14 +17,14 @@ covid_deaths <- read.csv("./data/covid_death_county.csv",
          urbanicity = Urban.Rural.Code,
          deaths_covid = Deaths.involving.COVID.19,
          deaths_all = Deaths.from.All.Causes) %>%
-  mutate(across(county, tolower)) %>%
+  mutate(county = tolower(county)) %>%
   mutate(county = trimws(county)) %>%
   select(!c("Date.as.of", "Start.Date", "End.Date", "Footnote"))
 
 # https://aqs.epa.gov/aqsweb/airdata/download_files.html#Meta
 aqi_county <- read.csv("./data/annual_aqi_by_county_2021.csv",
                        stringsAsFactors = FALSE) %>%
-  mutate(across(County, tolower)) %>%
+  mutate(County = tolower(County)) %>%
   mutate(State = state.abb[match(State,state.name)]) %>%
   filter(!is.na(State)) %>%
   rename(state = State, county = County, year = Year, max_AQI = Max.AQI, median_AQI = Median.AQI, unhealthy_sensitive_days = Unhealthy.for.Sensitive.Groups.Days) %>%
@@ -38,7 +37,7 @@ income_2019 <- read.csv("./data/unemployment_2019.csv",
   rename(county_code = FIPS_Code, state = State, county = Area_name) %>%
   filter(county_code != 0) %>%
   filter(county_code %% 1000 != 0) %>%
-  mutate(across(county, tolower))
+  mutate(county = tolower(county))
 income_2019$county <- gsub("(.*),.*", "\\1", income_2019$county)
 income_2019 <- income_2019 %>%
   mutate(Employed_2019 = as.numeric(gsub(",","", Employed_2019)),
@@ -70,7 +69,7 @@ deaths_income_aqi$region <- tolower(deaths_income_aqi$region)
 deaths_income_aqi <- deaths_income_aqi %>%
   mutate(urbanicity = fct_relevel(urbanicity, 
                                   "Large central metro", "Large fringe metro", "Medium metro", 
-                                  "Small metro", "Micropolitan", "Nonecore"))
+                                  "Small metro", "Micropolitan", "Noncore"))
 urbanicity_deaths_plot <- deaths_income_aqi %>%
   filter(!is.na(covid_death_percentage)) %>%
   ggplot(aes(x = urbanicity, y = deaths_covid)) +
@@ -261,8 +260,8 @@ covid_race_combine <- read.csv("./data/covid-county-by-race.csv",
                                  stringsAsFactors = FALSE) %>%
   select(-c(deaths, deathsPer100k)) %>%
   rename("region" = "state", "subregion" = "countyName") %>%
-  mutate(across(region, tolower)) %>%
-  mutate(across(subregion, tolower)) %>%
+  mutate(region = tolower(region)) %>%
+  mutate(subregion = tolower(subregion)) %>%
   rename("total pop" = total)
 covid_race_combine <- transform(covid_race_combine, subregion = sub(' city and borough', '', subregion))
 covid_race_combine <- transform(covid_race_combine, subregion = sub(' city', '', subregion))
@@ -323,8 +322,8 @@ census_2020 <- read.csv("./data/census_2020.csv",
                             stringsAsFactors = FALSE) %>%
   rename(region = STNAME, subregion = CTYNAME, population_2020 = POPESTIMATE2020) %>%
   filter(!SUMLEV == 40) %>%
-  mutate(across(region, tolower)) %>%
-  mutate(across(subregion, tolower)) %>%
+  mutate(region = tolower(region)) %>%
+  mutate(subregion = tolower(subregion)) %>%
   select(region, subregion, population_2020)
 census_2020 <- transform(census_2020, subregion = sub(' city and borough', '', subregion))
 census_2020 <- transform(census_2020, subregion = sub(' city', '', subregion))
