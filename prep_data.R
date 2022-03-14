@@ -216,7 +216,17 @@ urbanicity_unemployment_2020_plot <- deaths_income_aqi %>%
               ggplot(mapping = aes(x = urbanicity, y = mean_unemployment_rate_2020)) +
               geom_bar(stat="identity", fill = "#A897F9") +
               scale_x_discrete(guide = guide_axis(n.dodge=3)) +
-              labs(title = "Unemployment Rate in 2020 in Different Urbanicity Levels", x = "Levels of Urbanicity")
+              labs(title = "Average Unemployment Rate in 2020 in Different Urbanicity Levels", x = "Levels of Urbanicity", y = "Mean Unemployment Rate in 2020")
+
+urbanicity_income_2019_plot <- deaths_income_aqi %>%
+  filter(!is.na(Median_Household_Income_2019)) %>%
+  filter(!is.na(urbanicity)) %>%
+  group_by(urbanicity) %>%
+  summarise(mean_household_income_2019 = mean(Median_Household_Income_2019)) %>%
+  ggplot(mapping = aes(x = urbanicity, y = mean_household_income_2019)) +
+  geom_bar(stat="identity", fill = "#A897F9") +
+  scale_x_discrete(guide = guide_axis(n.dodge=3)) +
+  labs(title = "Average Household Income in 2019 in Different Urbanicity Levels", x = "Levels of Urbanicity", y = "Mean Household Income in 2019")
 ## there isn't much of a correlation here, but larger cities tend to have more unemployment rates
             
 unemployment_deaths_percentage_scatter <- deaths_income_aqi %>%
@@ -343,6 +353,3 @@ facilities_deaths_scatter <- healthcare_combined %>%
                aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
                parse = TRUE) +         
   labs(title = "Number of Healthcare Facilities per 5000 People in each County vs Percentage of Deaths Involving COVID in 2020", x = "# of Healthcare Facilities per 5000 People (Logrithmic)", y = "Percentage of All Deaths Involving COVID", color = "Urbanicity Category of each County")
-
-#gam()
-#mgcv package
