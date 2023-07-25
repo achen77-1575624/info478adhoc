@@ -164,14 +164,14 @@ page_4 <- tabPanel(
       p("Sorting by unemployment rate shows us how it slightly increases as you go from noncore counties
         to large fringe metros, and then it dramatically jumps up in large central metros. Looking at the
         scatterplot underneath, large central metros also have the strongest correlation between unemployment
-        rate and %CD with an R^2 value of 0.23. While this still isn't considered a strong correlation, it
+        rate and %CD with an R^2 value of 0.23 (R value of .48). While this is only moderately strong, it
         is still the most meaningful one. Interestingly enough, noncore counties had a smaller %CD the more
-        unemployment there was, but only has an R^2 value of -0.07."),
+        unemployment there was, but only has an R^2 value of 0.07 (R value of -.27."),
       p("Sorting by average household income in 2019 shows less conclusive results. The average household
         income of large fringe metro counties rose higher than that of large central metros, and the scatterplot
         underneath does not have any meaningful correlations at all. The strongest correlation between
         the median household income of counties in 2019 with %CD throughout the pandemic was a negative one
-        in micropolitan areas with an R^2 value of -0.04. This goes hand-in-hand with how noncore counties
+        in micropolitan areas with an R^2 value of 0.04 (R value of -.2). This goes hand-in-hand with how noncore counties
         had a very slight negative correlation between unemployment rates and %CD too"),
       p("The histogram in 'Unemployment Rate within Urbanicities' support how unemployment rate is a much
         more deciding factor in how COVID can impact a community. Communities across different most urbanicities
@@ -208,14 +208,11 @@ page_5 <- tabPanel(
       p("Like with the other visualizations, sorting by %CD controls for population size of ethnicity groups.
         Here, unemployment affects counties where the predominant ethnicity groups are Hispanic or Latino, Native
         populations, and black or African American the most."),
-      p("A very confusing part of these visualizations is how the calculated R^2 values don't seem to match
-        with the lines of best fit. In the scatterplot with total deaths, counties with a predominantly Asian
-        population have an R^2 value of 0.18, but the graph shows a downward trend. Sorting by %CD, these same
-        counties with a prominent Asian population have an R^2 value of 1.00, but have the most dramatic
-        'negative correlation' line of best fit. I assume that the values only talk about the strength
-        of the correlation, not the direction. The counties with Asian dominant populations could have
-        a perfect 1.00 negative correlation."),
-      p("Consideirng how many counties in the United States have white dominant populations, there may not have
+      p("In the scatterplot with total deaths, counties with a predominantly Asian
+        population have an R^2 value of 0.18 (R value of -.42), but sorting by %CD, these same
+        counties with a prominent Asian population have an R^2 value of 1.00 (R value of -1). This dramatically
+        overwhelming negative correlation seems too perfect and detached from the total deaths plot. Consideirng
+        how many counties in the United States have white dominant populations, there may not have
         been enough counties with other dominant ethnicities to where there wasn't enough data to support
         any significant strength of correlation at all.")
     )
@@ -236,7 +233,7 @@ page_6 <- tabPanel(
       p("In this scatterplot, most urbanicities seem to have negative correlations with the number
         of healthcare facilities and the %CD. The more healthcare facilities there are, the less
         that COVID deaths impact a community. The strongest correlation here is with large central metro
-        counties, with an R^2 value of -0.17. Another observation we can make is that noncore counties
+        counties, with an R^2 value of 0.17 (R value of .41). Another observation we can make is that noncore counties
         don't necessarily have less healthcare facilities for the population than larger central metros do.")
     )
 )
